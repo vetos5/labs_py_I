@@ -1,26 +1,33 @@
-def fibonacci(a, b, n, result=None):
+def fibonacci(first_num, second_num, steps, border, result=None):
     if result is None:
-        result = [a, b]
-    if len(result) == n:
-        return result
-    result.append(result[-1] + result[-2])
-    return fibonacci(a, b, n, result)
+        result = [first_num, second_num]
+    if len(result) >= steps or (result[-1] + result[-2] > border):
+        return result[:steps]
+
+    next_value = result[-1] + result[-2]
+    if next_value <= border:
+        result.append(next_value)
+
+    return fibonacci(first_num, second_num, steps, border, result)
 
 
 def main():
     try:
         with open('input.txt', 'r') as f:
             input_values = f.read().split(',')
-            a = int(input_values[0])
-            b = int(input_values[1])
+            first_num = float(input_values[0])
+            second_num = float(input_values[1])
 
         with open('steps.txt', 'r') as f:
-            n = int(f.read())
+            steps = int(f.read())
 
-        if n < 2:
+        with open('border.txt', 'r') as f:
+            border = float(f.read())
+
+        if steps < 2:
             raise ValueError("Number of steps must be at least 2")
 
-        result = fibonacci(a, b, n)
+        result = fibonacci(first_num, second_num, steps, border)
         output_str = ', '.join(str(x) for x in result)
         with open('output.txt', 'w') as f:
             f.write(output_str)
