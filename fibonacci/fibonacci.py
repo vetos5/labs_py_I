@@ -1,22 +1,25 @@
-def fibonacci(first_num, second_num, steps, border, result=None):
-    if result is None:
-        result = [first_num, second_num]
-    if len(result) >= steps or (result[-1] + result[-2] > border):
-        return result[:steps]
+def fibonacci(input_values, steps):
+    if len(input_values) >= steps:
+        return input_values
+    next_value = input_values[-1] + input_values[-2]
+    result = input_values + [next_value]
+    return fibonacci(result, steps)
 
-    next_value = result[-1] + result[-2]
-    if next_value <= border:
-        result.append(next_value)
 
-    return fibonacci(first_num, second_num, steps, border, result)
+def fibonacci_bordered(input_values, border):
+    result = input_values[-1] + input_values[-2]
+    if result > border:
+        return input_values
+    if result <= border:
+        result = input_values + [result]
+    return fibonacci_bordered(result, border)
 
 
 def main():
     try:
         with open('input.txt', 'r') as f:
-            input_values = f.read().split(',')
-            first_num = float(input_values[0])
-            second_num = float(input_values[1])
+            input_values = f.read()
+            input_values = [float(numbers) for numbers in input_values.split(',')]
 
         with open('steps.txt', 'r') as f:
             steps = int(f.read())
@@ -27,10 +30,17 @@ def main():
         if steps < 2:
             raise ValueError("Number of steps must be at least 2")
 
-        result = fibonacci(first_num, second_num, steps, border)
-        output_str = ', '.join(str(x) for x in result)
+        result = fibonacci(input_values, steps)
+        output_str = ', '.join(str(num) for num in result)
         with open('output.txt', 'w') as f:
             f.write(output_str)
+            f.close()
+
+        result_border = fibonacci_bordered(input_values, border)
+        output_str_border = ', '.join(str(num) for num in result_border)
+        with open('output_bordered.txt', 'w') as f:
+            f.write(output_str_border)
+            f.close()
 
     except FileNotFoundError as e:
         print(f"Error: File not found - {e.filename}")
