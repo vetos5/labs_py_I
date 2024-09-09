@@ -7,6 +7,9 @@ def fibonacci(input_values, steps):
 
 
 def fibonacci_bordered(input_values, border):
+
+    if len(input_values) < 2:
+        return input_values
     result = input_values[-1] + input_values[-2]
     if result > border:
         return input_values
