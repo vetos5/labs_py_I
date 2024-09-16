@@ -42,10 +42,17 @@ def divide(vector1, vector2):
 
 
 def read_vector(file_path):
-    with open(file_path, 'r') as f:
-        vector = f.read()
-        vector = [float(numbers) for numbers in vector.split(',')]
-    return vector
+    try:
+        with open(file_path, 'r') as f:
+            vector = f.read()
+            vector = [float(numbers) for numbers in vector.split(',')]
+        return vector
+    except FileNotFoundError as e:
+        print(f"Error: File not found - {e.filename}")
+    except ValueError as e:
+        print(f"Error: Unable to convert data to float - {e}")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 
 def print_vector(result):
