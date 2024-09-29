@@ -1,0 +1,10 @@
+class MatrixExceptions:
+    MATRIX_SIZE_MISMATCH_MSG = "Matrix size mismatch"
+    DIVISION_BY_ZERO_MSG = "Division by zero encountered."
+    FILE_NOT_FOUND_MSG = "File not found."
+    VALUE_CONVERSION_ERROR_MSG = "Unable to convert data to float."
+    UNEXPECTED_ERROR_MSG = "An unexpected error occurred."
+    MALFORMED_DATA_MSG = "Matrix data is incomplete or incorrectly formatted."
+    MATRIX_SIZE_ERROR = "Matrix should be 3x3."
+    MATRIX_DETERMINANT_ERROR_MSG = "Matrix is singular and cannot be inverted."
+    MATRIX_IS_NONE = "Matrix is empty."
