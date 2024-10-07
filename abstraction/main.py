@@ -1,4 +1,8 @@
-from shape import *
+from circleClass import *
+from squareClass import *
+from cyanColor import *
+from fuchsiaColor import *
+from yellowColor import *
 
 
 def main():
